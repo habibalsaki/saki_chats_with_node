@@ -1,0 +1,4 @@
+{
+    "host" : "http://localhost:3000",
+    "dbURI" : "mongodb://chatuser:chatpass@ds163826.mlab.com:63826/sakichatswithnode"
+}
