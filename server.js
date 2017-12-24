@@ -9,6 +9,7 @@ app.set('view engine', 'ejs');
 
 
 app.use(express.static('public'));
+app.use(chatRootModule.session);
 app.use('/',chatRootModule.router);
 
 

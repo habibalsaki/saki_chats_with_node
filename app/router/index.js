@@ -12,6 +12,13 @@ module.exports = () => {
             },
             '/room' : (req,res,next) => {
                 res.render('rooms');
+            },
+            '/getSession': (req, res, next) => {
+                res.send(req.session.favColor)
+            },
+            '/setSession': (req,res,next) => {
+                req.session.favColor = "red";
+                res.send("session set");
             }
         },
         'post' : {
