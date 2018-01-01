@@ -1,5 +1,6 @@
 'use strict';
 const helper = require('../helpers');
+const passport = require('passport');
 
 module.exports = () => {
     let routes = {
@@ -7,18 +8,27 @@ module.exports = () => {
             '/' : (req,res,next) => {
                 res.render('login');
             },
-            '/chat' : (req,res,next) => {
+            '/chat' : [helper.isAuthenticated, (req,res,next) => {
                 res.render('chatroom');
-            },
-            '/room' : (req,res,next) => {
-                res.render('rooms');
-            },
-            '/getSession': (req, res, next) => {
-                res.send(req.session.favColor)
-            },
-            '/setSession': (req,res,next) => {
-                req.session.favColor = "red";
-                res.send("session set");
+            }],
+            '/room' : [helper.isAuthenticated, (req,res,next) => {
+                res.render('rooms', {
+                    user: req.user
+                });
+            }],
+            '/auth/facebook' : passport.authenticate('facebook',{scope : ['public_profile','email']}),
+            '/auth/facebook/callback': passport.authenticate('facebook', {
+                successRedirect: '/room',
+                failureRedirect: '/'
+            }),
+            '/auth/twitter' : passport.authenticate('twitter'),
+            '/auth/twitter/callback': passport.authenticate('twitter', {
+                successRedirect: '/room',
+                failureRedirect: '/'
+            }),
+            '/logout': (req,res,next) => {
+                req.logout();
+                res.redirect('/');
             }
         },
         'post' : {

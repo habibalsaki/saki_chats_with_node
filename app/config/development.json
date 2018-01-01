@@ -1,5 +1,17 @@
 {
     "host" : "http://localhost:3000",
     "dbURI" : "mongodb://chatuser:chatpass@ds163826.mlab.com:63826/sakichatswithnode",
-    "secretKey": "chatcanbegood"
+    "secretKey": "chatcanbegood",
+    "fb": {
+        "clientID" : "1626840584042522",
+        "clientSecret": "fbcf86b27c223ba49bd371c038bfb0fa",
+        "callbackURL": "//localhost:3000/auth/facebook/callback",
+        "profileFields": ["id","displayName","name","picture"]
+    },
+    "twitter": {
+        "consumerKey": "sWmPfdONpWbkSybk9ZQ4Tmpny",
+        "consumerSecret": "XneTTQ4HfSkyNv2sQGI7xaOYWzshNVriAz7fKb4saVdQp2C7Ff",
+        "callbackURL": "//localhost:3000/auth/twitter/callback",
+        "profileFields": ["id","displayName","name","picture"]
+    }
 }
