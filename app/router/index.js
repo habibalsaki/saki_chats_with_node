@@ -1,6 +1,7 @@
 'use strict';
 const helper = require('../helpers');
 const passport = require('passport');
+const config = require('../config');
 
 module.exports = () => {
     let routes = {
@@ -13,7 +14,8 @@ module.exports = () => {
             }],
             '/room' : [helper.isAuthenticated, (req,res,next) => {
                 res.render('rooms', {
-                    user: req.user
+                    user: req.user,
+                    host: config.host
                 });
             }],
             '/auth/facebook' : passport.authenticate('facebook',{scope : ['public_profile','email']}),
